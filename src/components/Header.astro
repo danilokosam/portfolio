@@ -1,0 +1,118 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+
+const navItems = [
+  {
+    title: "Experiencia",
+    label: "experiencia",
+    url: "/#experiencia",
+  },
+  {
+    title: "Proyectos",
+    label: "proyectos",
+    url: "/#proyectos",
+  },
+  {
+    title: "Sobre mí",
+    label: "sobre-mi",
+    url: "/#sobre-mi",
+  },
+  {
+    title: "Contacto",
+    label: "contacto",
+    url: "mailto:miduga@gmail.com",
+  },
+];
+---
+
+<header
+  class="fixed top-0 z-10 flex items-center justify-end w-full mx-auto mt-2"
+>
+  <nav
+    class="flex px-3 text-sm mobile-xxs:text-[10px] mobile-xs:text-[13px] md:text-[15px] font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center"
+  >
+    {
+      navItems.map((link) => (
+        <a
+          class="relative block px-2 py-2 transition hover:text-blue-500 dark:hover:text-yellow-500"
+          aria-label={link.label}
+          href={link.url}
+        >
+          {link.title}
+        </a>
+      ))
+    }
+    <ThemeToggle />
+  </nav>
+</header>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const sections = document.querySelectorAll("section");
+    const navItems = document.querySelectorAll("header nav a");
+
+    // Recibe un array como argumento. Cada entry representa un elemento observado y su estado de intersección
+    const callback = (entries: any[]) => {
+      entries.forEach((entry) => {
+        // Se itera sobre cada entry en el array entries
+        if (entry.isIntersecting) {
+          // Se verifica si el elemento entry está intersectando con el viewport(Si es visible en pantalla)
+          navItems.forEach((item) => {
+            if (item.getAttribute("aria-label") == entry.target.id) {
+              item.classList.add("text-yellow-500");
+            } else {
+              item.classList.remove("text-yellow-500");
+            }
+          });
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(callback, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3,
+    });
+
+    // Itera sobre cada elemento en sections y le dice al observer que observe cada section
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Cleanup function
+    // Este evento se dispara cuando la visibilidad de la página cambia, es decir, cuando la página se oculta o se muestra
+    document.onvisibilitychange = () => {
+      // Asignación de una función al evento visibilitychange
+      // Si cambia el estado de visibilidad del documento es "hidden", lo que significa que la página está oculta(Por ejjemplo. cuando el usuasrio cambia a otra pestaña en el navegador)
+      if (document.visibilityState === "hidden") {
+        observer.disconnect(); // Se desconecta el observer de la página, deteniendo el proceso de observación
+      } else {
+        // Si la página no esta oculta (es decir, visible) se itera sobre cada section en sections y se vuelve a observar cada una con el observer
+        sections.forEach((section) => {
+          observer.observe(section);
+        });
+      }
+    };
+  });
+</script>
+
+<style>
+  nav {
+    animation: nav-shadown 1s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 100px;
+  }
+
+  nav {
+    @apply dark:bg-gray-800/90 bg-white/50;
+  }
+
+  @keyframes nav-shadown {
+    0% {
+      @apply dark:bg-gray-800/0 bg-white/0;
+    }
+    to {
+      @apply shadow-lg ring-1 backdrop-blur ring-white/10;
+    }
+  }
+</style>

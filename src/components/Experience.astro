@@ -1,0 +1,33 @@
+---
+import ExperienceItem from "./ExperienceItem.astro";
+const EXPERIENCE = [
+  {
+    date: "Febrero 2023",
+    title: "Buscador de peliculas",
+    description: "Buscador de peliculas con una API de terceros usando React.",
+    link: "https://buscador-de-peliculas-daniel-duarte.netlify.app/",
+  },
+  {
+    date: "Marzo 2023",
+    title: "Marketing UI design in Figma",
+    description:
+      "All of the pages and components are first designed in Figma and we keep a parity between the two versions even as we update the project.",
+  },
+  {
+    date: "Marzo 2023",
+    title: "Aplicacion del clima",
+    description:
+      "Get access to over 20+ pages including a dashboard layout, charts, kanban board, calendar, and pre-order E-commerce & Marketing pages.",
+  },
+];
+---
+
+<ol class="relative mt-16 ml-[-1.1rem]">
+  {
+    EXPERIENCE.map((experience) => (
+      <li class="ms-4">
+        <ExperienceItem {...experience} />
+      </li>
+    ))
+  }
+</ol>
