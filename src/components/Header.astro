@@ -20,7 +20,7 @@ const navItems = [
   {
     title: "Contacto",
     label: "contacto",
-    url: "mailto:miduga@gmail.com",
+    url: "mailto:miduga@gmail.com", // <-- Cambiar el correo
   },
 ];
 ---
@@ -68,6 +68,7 @@ const navItems = [
       });
     };
 
+    // Crea un nuevo objeto IntersectionObserver
     const observer = new IntersectionObserver(callback, {
       root: null,
       rootMargin: "0px",
@@ -78,12 +79,12 @@ const navItems = [
     sections.forEach((section) => {
       observer.observe(section);
     });
-
+    
     // Cleanup function
     // Este evento se dispara cuando la visibilidad de la página cambia, es decir, cuando la página se oculta o se muestra
     document.onvisibilitychange = () => {
       // Asignación de una función al evento visibilitychange
-      // Si cambia el estado de visibilidad del documento es "hidden", lo que significa que la página está oculta(Por ejjemplo. cuando el usuasrio cambia a otra pestaña en el navegador)
+      // Si cambia el estado de visibilidad del documento es "hidden", lo que significa que la página está oculta(Por ejemplo. cuando el usuario cambia a otra pestaña en el navegador)
       if (document.visibilityState === "hidden") {
         observer.disconnect(); // Se desconecta el observer de la página, deteniendo el proceso de observación
       } else {

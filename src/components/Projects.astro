@@ -53,7 +53,7 @@ const PROJECTS = [
 ];
 ---
 
-<div class="flex flex-col gap-y-16">
+<div class="flex flex-col gap-y-16 mobile-xxs:p-4">
   {
     PROJECTS.map(({ image, title, description, tags, link, github }) => (
       <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
@@ -62,7 +62,6 @@ const PROJECTS = [
             <img
               alt="Recién llegado vs 5 años en Nueva Zelanda"
               class="object-cover object-center w-full max-h-52 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
-              loading="lazy"
               src={image}
             />
           </div>

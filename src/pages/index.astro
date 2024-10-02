@@ -1,17 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
-import Badge from "../components/Badge.astro";
-import LinkedinIcon from "../icons/LinkedinIcon.astro";
-import SocialPill from "../components/SocialPill.astro";
-import GithubIcon from "../icons/GitHubIcon.astro";
-import EmailIcon from "../icons/EmailIcon.astro";
 import Experience from "../components/Experience.astro";
 import SectionContainer from "../components/SectionContainer.astro";
 import Briefcase from "../icons/Briefcase.astro";
 import CodeIcon from "../icons/CodeIcon.astro";
 import Projects from "../components/Projects.astro";
 import TitleSection from "../components/TitleSection.astro";
+import Hero from "../components/Hero.astro";
 ---
 
 <Layout
@@ -19,59 +14,27 @@ import TitleSection from "../components/TitleSection.astro";
   description="Contrata a Daniel Duarte para crear tu aplicación web. Especializado en crear aplicaciones únicas."
 >
   <main class="px-4">
-    <SectionContainer class="mobile-xs:py-24 py-44 pb-24">
-      <!-- Pendiente de cambiar el link -->
-      <h1
-        class="text-white lg:text-4xl font-bold flex flex-row gap-x-4 pb-6 lg:pb-4"
-      >
-        Hola 👋, soy Daniel Duarte <a
-          href="https://www.linkedin.com/in/daniel-duarte"
-          target="_blank"
-          rel="noopener"
-          class="flex justify-center items-center"
-        >
-          <Badge>Disponible para trabajar</Badge>
-        </a>
-      </h1>
-      <h2 class="text-xl lg:text-2xl text-wrap max-w-[700px]">
-        1 año de experiencia. Desarrollador Web. Viviendo en Alcala de Henares,
-        <span class="text-red-400 opacity-85"> España </span>🥘
-      </h2>
-
-      <nav class="flex gap-4 mt-3 flex-wrap text-sm">
-        <SocialPill
-          href="https://www.linkedin.com/in/alejandro-vargas-371394263/"
-        >
-          <LinkedinIcon class="w-6 h-4 md:size-3" />
-          Linkedin
-        </SocialPill>
-
-        <SocialPill href="https://github.com/danilokosam">
-          <GithubIcon class="w-6 h-4 md:size-3" />
-          GitHub
-        </SocialPill>
-
-        <SocialPill href="mailto:alejandrovargas21col@gmail.com">
-          <EmailIcon class="w-6 h-4 md:size-3" />
-          Gmail
-        </SocialPill>
-      </nav>
+    <SectionContainer class="py-16 md:py-36">
+      <Hero>
+        <slot />
+      </Hero>
     </SectionContainer>
-
+  </main>
+  <div class="space-y-24">
     <SectionContainer id="experiencia">
       <TitleSection>
         <Briefcase class="size-6" />
-        Experiencia Laboral</TitleSection
-      >
+        Experiencia Laboral
+      </TitleSection>
       <Experience />
     </SectionContainer>
 
     <SectionContainer id="proyectos">
-      <h2 class="text-2xl font-semibold mb-6 flex gap-x-2 items-center">
+      <TitleSection>
         <CodeIcon class="size-6" />
         Proyectos
-      </h2>
+      </TitleSection>
       <Projects />
     </SectionContainer>
-  </main>
+  </div>
 </Layout>
